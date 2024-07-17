@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AE7F4007-0163-45AD-BE31-9EFF45DCF7B7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LiveSplit.BarnyardSplits</RootNamespace>
+    <AssemblyName>LiveSplit.BarnyardSplits</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\LiveSplit\Components\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\BarnyardFactory.cs" />
+    <Compile Include="src\BarnyardSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\BarnyardSettings.Designer.cs">
+      <DependentUpon>BarnyardSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\BarnyardSplits.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LiveSplit\lib\CustomFontDialog\CustomFontDialog\CustomFontDialog.csproj">
+      <Project>{a227ab5d-ffe0-4243-9ca0-4cd69b533dcf}</Project>
+      <Name>CustomFontDialog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LiveSplit\lib\SpeedrunComSharp\src\SpeedrunComSharp\SpeedrunComSharp.csproj">
+      <Project>{f366546f-6b15-4ca3-aa8e-c007b1c32cdd}</Project>
+      <Name>SpeedrunComSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LiveSplit\lib\WinForms Color Picker\WinFormsColor\WinFormsColor.csproj">
+      <Project>{e0ee8a0e-ad5c-4915-afa8-05134c371587}</Project>
+      <Name>WinFormsColor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LiveSplit\src\LiveSplit.Core\LiveSplit.Core.csproj">
+      <Project>{2483ae89-0b19-4525-a7ee-cee387988aa8}</Project>
+      <Name>LiveSplit.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LiveSplit\src\UpdateManager\UpdateManager.csproj">
+      <Project>{e03241a3-65fc-4432-afb4-42c07eb4dff1}</Project>
+      <Name>UpdateManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="src\BarnyardSettings.resx">
+      <DependentUpon>BarnyardSettings.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

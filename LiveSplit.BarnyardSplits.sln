@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveSplit.BarnyardSplits", "LiveSplit.BarnyardSplits.csproj", "{AE7F4007-0163-45AD-BE31-9EFF45DCF7B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveSplit.Core", "..\LiveSplit\src\LiveSplit.Core\LiveSplit.Core.csproj", "{2483AE89-0B19-4525-A7EE-CEE387988AA8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpdateManager", "..\LiveSplit\src\UpdateManager\UpdateManager.csproj", "{E03241A3-65FC-4432-AFB4-42C07EB4DFF1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsColor", "..\LiveSplit\lib\WinForms Color Picker\WinFormsColor\WinFormsColor.csproj", "{E0EE8A0E-AD5C-4915-AFA8-05134C371587}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeedrunComSharp", "..\LiveSplit\lib\SpeedrunComSharp\src\SpeedrunComSharp\SpeedrunComSharp.csproj", "{F366546F-6B15-4CA3-AA8E-C007B1C32CDD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomFontDialog", "..\LiveSplit\lib\CustomFontDialog\CustomFontDialog\CustomFontDialog.csproj", "{A227AB5D-FFE0-4243-9CA0-4CD69B533DCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		UpdateManagerExe|Any CPU = UpdateManagerExe|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE7F4007-0163-45AD-BE31-9EFF45DCF7B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE7F4007-0163-45AD-BE31-9EFF45DCF7B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE7F4007-0163-45AD-BE31-9EFF45DCF7B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE7F4007-0163-45AD-BE31-9EFF45DCF7B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE7F4007-0163-45AD-BE31-9EFF45DCF7B7}.UpdateManagerExe|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE7F4007-0163-45AD-BE31-9EFF45DCF7B7}.UpdateManagerExe|Any CPU.Build.0 = Debug|Any CPU
+		{2483AE89-0B19-4525-A7EE-CEE387988AA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2483AE89-0B19-4525-A7EE-CEE387988AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2483AE89-0B19-4525-A7EE-CEE387988AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2483AE89-0B19-4525-A7EE-CEE387988AA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2483AE89-0B19-4525-A7EE-CEE387988AA8}.UpdateManagerExe|Any CPU.ActiveCfg = Debug|Any CPU
+		{2483AE89-0B19-4525-A7EE-CEE387988AA8}.UpdateManagerExe|Any CPU.Build.0 = Debug|Any CPU
+		{E03241A3-65FC-4432-AFB4-42C07EB4DFF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E03241A3-65FC-4432-AFB4-42C07EB4DFF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E03241A3-65FC-4432-AFB4-42C07EB4DFF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E03241A3-65FC-4432-AFB4-42C07EB4DFF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E03241A3-65FC-4432-AFB4-42C07EB4DFF1}.UpdateManagerExe|Any CPU.ActiveCfg = UpdateManagerExe|Any CPU
+		{E03241A3-65FC-4432-AFB4-42C07EB4DFF1}.UpdateManagerExe|Any CPU.Build.0 = UpdateManagerExe|Any CPU
+		{E0EE8A0E-AD5C-4915-AFA8-05134C371587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0EE8A0E-AD5C-4915-AFA8-05134C371587}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0EE8A0E-AD5C-4915-AFA8-05134C371587}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0EE8A0E-AD5C-4915-AFA8-05134C371587}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0EE8A0E-AD5C-4915-AFA8-05134C371587}.UpdateManagerExe|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0EE8A0E-AD5C-4915-AFA8-05134C371587}.UpdateManagerExe|Any CPU.Build.0 = Debug|Any CPU
+		{F366546F-6B15-4CA3-AA8E-C007B1C32CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F366546F-6B15-4CA3-AA8E-C007B1C32CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F366546F-6B15-4CA3-AA8E-C007B1C32CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F366546F-6B15-4CA3-AA8E-C007B1C32CDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F366546F-6B15-4CA3-AA8E-C007B1C32CDD}.UpdateManagerExe|Any CPU.ActiveCfg = Debug|Any CPU
+		{F366546F-6B15-4CA3-AA8E-C007B1C32CDD}.UpdateManagerExe|Any CPU.Build.0 = Debug|Any CPU
+		{A227AB5D-FFE0-4243-9CA0-4CD69B533DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A227AB5D-FFE0-4243-9CA0-4CD69B533DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A227AB5D-FFE0-4243-9CA0-4CD69B533DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A227AB5D-FFE0-4243-9CA0-4CD69B533DCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A227AB5D-FFE0-4243-9CA0-4CD69B533DCF}.UpdateManagerExe|Any CPU.ActiveCfg = Debug|Any CPU
+		{A227AB5D-FFE0-4243-9CA0-4CD69B533DCF}.UpdateManagerExe|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3191F87-D5B0-4BF7-92C2-E78278E9FFBD}
+	EndGlobalSection
+EndGlobal
