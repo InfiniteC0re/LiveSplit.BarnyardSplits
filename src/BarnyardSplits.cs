@@ -71,7 +71,7 @@ namespace LiveSplit.UI.Components
         private class ServerEventLoadingEnd : IServerEvent { }
 
 
-        private List<IServerEvent> Events;
+        private List<IServerEvent> Events = new List<IServerEvent>();
         private object EventsLock = new object();
 
         public BarnyardComponent(LiveSplitState state)

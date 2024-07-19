@@ -3,6 +3,7 @@ using System;
 
 namespace LiveSplit.UI.Components
 {
+
     public class BarnyardFactory : IComponentFactory
     {
         // The displayed name of the component in the Layout Editor.
@@ -20,7 +21,7 @@ namespace LiveSplit.UI.Components
         // Fill in this empty string with the URL of the repository where your component is hosted.
         // This should be the raw content version of the repository. If you're not uploading this
         // to GitHub or somewhere, you can ignore this.
-        public string UpdateURL => "http://storage.opentoshi.net/BarnyardSplits/";
+        public string UpdateURL => "https://storage.opentoshi.net/BarnyardSplits/";
 
         // Fill in this empty string with the path of the XML file containing update information.
         // Check other LiveSplit components for examples of this. If you're not uploading this to
