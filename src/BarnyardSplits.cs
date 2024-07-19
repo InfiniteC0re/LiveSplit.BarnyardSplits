@@ -20,12 +20,59 @@ namespace LiveSplit.UI.Components
     {
         public BarnyardSettings Settings { get; set; }
 
-        protected LiveSplitState CurrentState { get; set; }
+        public LiveSplitState CurrentState { get; set; }
 
         public override string ComponentName => "Barnyard Autosplitter";
 
         private Thread PipeThread;
         private TimerModel Timer;
+
+        private interface IServerEvent { }
+
+        private class ServerEventStartRun : IServerEvent { }
+
+        private class ServerEventEndRun : IServerEvent
+        {
+            
+            public TimeSpan Time;
+
+            public ServerEventEndRun(TimeSpan time)
+            {
+                Time = time;
+            }
+        }
+
+        private class ServerEventReset : IServerEvent { }
+
+        private class ServerEventResume : IServerEvent { }
+
+        private class ServerEventPause : IServerEvent { }
+
+        private class ServerEventSplit : IServerEvent
+        {
+            public TimeSpan Time;
+            public ServerEventSplit(TimeSpan time)
+            {
+                Time = time;
+            }
+        }
+
+        private class ServerEventTimeSync : IServerEvent
+        {
+            public TimeSpan Time;
+            public ServerEventTimeSync(TimeSpan time)
+            {
+                Time = time;
+            }
+        }
+
+        private class ServerEventLoadingStart : IServerEvent { }
+
+        private class ServerEventLoadingEnd : IServerEvent { }
+
+
+        private List<IServerEvent> Events;
+        private object EventsLock = new object();
 
         public BarnyardComponent(LiveSplitState state)
         {
@@ -85,54 +132,55 @@ namespace LiveSplit.UI.Components
                     break;
                 }
 
-                switch (buf[currentByte])
+                lock (EventsLock)
                 {
-                    case (byte)'1':
-                        // start run
-                        Timer.Reset();
-                        Timer.Start();
-                        break;
-                    case (byte)'2':
-                        // end run
-                        string endGameTime = System.Text.Encoding.UTF8.GetString(buf, currentByte + 1, msgLen - 1);
-                        CurrentState.SetGameTime(StrToTimeSpan(endGameTime));
-                        Timer.Split();
-                        break;
-                    case (byte)'3':
-                        // reset
-                        Timer.Reset();
-                        break;
-                    case (byte)'4':
-                        // resume
-                        Timer.UndoAllPauses();
-                        break;
-                    case (byte)'5':
-                        // pause
-                        Timer.Pause();
-                        break;
-                    case (byte)'6':
-                        // split
-                        string curGameTime = System.Text.Encoding.UTF8.GetString(buf, currentByte + 1, msgLen - 1);
-                        CurrentState.SetGameTime(StrToTimeSpan(curGameTime));
-                        Timer.Split();
-                        break;
-                    case (byte)'7':
-                        // set in game time
-                        string syncGameTime = System.Text.Encoding.UTF8.GetString(buf, currentByte + 1, msgLen - 1);
-                        CurrentState.SetGameTime(StrToTimeSpan(syncGameTime));
-                        break;
-                    case (byte)'8':
-                        // loading started
-                        CurrentState.IsGameTimePaused = true;
-                        break;
-                    case (byte)'9':
-                        // loading ended
-                        CurrentState.IsGameTimePaused = false;
-                        break;
-                    default:
-                        Debug.Print("Got an unknown message!");
-                        break;
+                    switch (buf[currentByte])
+                    {
+                        case (byte)'1':
+                            // start run
+                            Events.Add(new ServerEventStartRun());
+                            break;
+                        case (byte)'2':
+                            // end run
+                            string endGameTime = System.Text.Encoding.UTF8.GetString(buf, currentByte + 1, msgLen - 1);
+                            Events.Add(new ServerEventEndRun(StrToTimeSpan(endGameTime)));
+                            break;
+                        case (byte)'3':
+                            // reset
+                            Events.Add(new ServerEventReset());
+                            break;
+                        case (byte)'4':
+                            // resume
+                            Events.Add(new ServerEventResume());
+                            break;
+                        case (byte)'5':
+                            // pause
+                            Events.Add(new ServerEventPause());
+                            break;
+                        case (byte)'6':
+                            // split
+                            string curGameTime = System.Text.Encoding.UTF8.GetString(buf, currentByte + 1, msgLen - 1);
+                            Events.Add(new ServerEventSplit(StrToTimeSpan(curGameTime)));
+                            break;
+                        case (byte)'7':
+                            // set in game time
+                            string syncGameTime = System.Text.Encoding.UTF8.GetString(buf, currentByte + 1, msgLen - 1);
+                            Events.Add(new ServerEventTimeSync(StrToTimeSpan(syncGameTime)));
+                            break;
+                        case (byte)'8':
+                            // loading started
+                            Events.Add(new ServerEventLoadingStart());
+                            break;
+                        case (byte)'9':
+                            // loading ended
+                            Events.Add(new ServerEventLoadingEnd());
+                            break;
+                        default:
+                            Debug.Print("Got an unknown message!");
+                            break;
+                    }
                 }
+                
 
                 currentByte += msgLen;
                 numReadMessages += 1;
@@ -214,7 +262,66 @@ namespace LiveSplit.UI.Components
 
         public override void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
+            if (state != CurrentState)
+            {
+                CurrentState = state;
+                Timer.CurrentState = state;
+            }
 
+            if (Events.Count == 0)
+                return;
+
+            lock (EventsLock)
+            {
+                foreach (IServerEvent evt in Events)
+                {
+                    if (evt is ServerEventStartRun)
+                    {
+                        Timer.Reset();
+                        Timer.Start();
+                    }
+                    else if (evt is ServerEventEndRun)
+                    {
+                        ServerEventEndRun endRun = (ServerEventEndRun)evt;
+                        state.SetGameTime(endRun.Time);
+                        Timer.Split();
+                    }
+                    else if (evt is ServerEventReset)
+                    {
+                        Timer.Reset();
+                    }
+                    else if (evt is ServerEventResume)
+                    {
+                        Timer.UndoAllPauses();
+                    }
+                    else if (evt is ServerEventPause)
+                    {
+                        Timer.Pause();
+                    }
+                    else if (evt is ServerEventSplit)
+                    {
+                        ServerEventSplit split = (ServerEventSplit)evt;
+                        state.SetGameTime(split.Time);
+                        Timer.Split();
+                    }
+                    else if (evt is ServerEventTimeSync)
+                    {
+                        ServerEventTimeSync sync = (ServerEventTimeSync)evt;
+                        state.SetGameTime(sync.Time);
+                    }
+                    else if (evt is ServerEventLoadingStart)
+                    {
+                        state.IsGameTimePaused = true;
+                    }
+                    else if (evt is ServerEventLoadingEnd)
+                    {
+                        state.IsGameTimePaused = false;
+                    }
+                }
+
+                // Remove events from the queue
+                Events.Clear();
+            }
         }
 
         public override void Dispose()

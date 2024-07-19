@@ -3,7 +3,6 @@
   <GameIcon />
   <GameName>Barnyard</GameName>
   <CategoryName>Any%</CategoryName>
-  <LayoutPath>.\Barnyard Layout.lsl</LayoutPath>
   <Metadata>
     <Run id="" />
     <Platform usesEmulator="False">
@@ -14,8 +13,7 @@
   </Metadata>
   <Offset>00:00:00</Offset>
   <AttemptCount>0</AttemptCount>
-  <AttemptHistory>
-  </AttemptHistory>
+  <AttemptHistory />
   <Segments>
     <Segment>
       <Name>-Miles Welcome</Name>
